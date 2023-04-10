@@ -1,19 +1,26 @@
-import express from "express"
-import usuarioRoutes from "./routes/usuarioRoutes.js"
+import express from 'express'
+import usuarioRoutes from './routes/usuarioRoutes.js'
 
-// crear application
+
+// crear la app
 const app = express()
 
-// habilitar pug
-app.set("view engine", "pug")
-app.set("views", "./views")
+//habilitar Pug
 
-// routing
+app.set('view engine', 'pug')
+app.set('views', './views')
+
+// carpeta publica
+app.use( express.static('public'))
+
+// Routing
 app.use('/auth', usuarioRoutes)
 
 
-//definir puerto y arracar el proyecto
+
+// definir puerto y arrancar servidor
 const port = 3000;
-app.listen(port, () => {
-    console.log(`Servidor running puerto ${port}`);
+
+app.listen(port, () =>{
+  console.log(`El servidor esta funcionando en el puerto ${port}`)
 })
