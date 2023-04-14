@@ -1,3 +1,4 @@
+import { request } from "express"
 import {check, validationResult} from "express-validator"
 import Usuario from "../models/Usuario.js"
 
@@ -22,8 +23,19 @@ const formularioLogin = (req, res) => {
 
     let result = validationResult(req)
 
+
     // Verificar que el resultado este vacio
-    
+    if(!result.isEmpty()){
+      // errores
+      return res.render('auth/registro', {
+            pagina: "Crear Cuenta",
+            errores: result.array(),
+            usuario: {
+              nombre: req.body.nombre,
+              email: req.body.email
+            }
+      })
+    }
 
     res.json(result.array())
 
